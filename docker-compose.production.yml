@@ -1,30 +1,30 @@
 version: '3'
 
 volumes:
-  pg_data:
-  static:
+  pg_data_kit:
+  static_kit:
 
 services:
   db:
     image: postgres:13
     env_file: .env
     volumes:
-      - pg_data:/var/lib/postgresql/data
+      - pg_data_kit:/var/lib/postgresql/data
   backend:
     image: dnevvs/kittygram_backend
     env_file: .env
     volumes:
-      - static:/backend_static
+      - static_kit:/backend_static
   frontend:
     env_file: .env
     image: dnevvs/kittygram_frontend
     command: cp -r /app/build/. /static/
     volumes:
-      - static:/static
+      - static_kit:/static
   gateway:
     image: dnevvs/kittygram_gateway
     env_file: .env
     ports:
       - 9000:80
     volumes:
-      - static:/static
+      - static_kit:/static
