@@ -4,11 +4,11 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-cg6*%6d51ef8f#4!r3*$vmxm4)abgjw8mo!4y-q*uq1!4$-89$'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
-DEBUG = True
+DEBUG = (os.getenv('DEBUG', 'False') == 'True')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['130.193.53.253', '127.0.0.1', 'localhost', 'kit.blinklab.com']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -57,6 +57,7 @@ WSGI_APPLICATION = 'kittygram_backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
+        'DB_NAME': os.getenv('DB_NAME', 'kittygram'),
         'NAME': os.getenv('POSTGRES_DB', 'kittygram'),
         'USER': os.getenv('POSTGRES_USER', 'kittygram_user'),
         'PASSWORD': os.getenv('POSTGRES_PASSWORD', ''),
@@ -102,7 +103,7 @@ STATIC_ROOT = BASE_DIR / 'collected_static'
 
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / '/var/www/kittygram/media'
+MEDIA_ROOT = BASE_DIR / '/media'
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
