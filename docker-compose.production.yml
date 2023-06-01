@@ -25,7 +25,6 @@ services:
       - static:/static
   gateway:
     image: dnevvs/kittygram_gateway
-    env_file: .env
     ports:
       - 9000:80
     volumes:
